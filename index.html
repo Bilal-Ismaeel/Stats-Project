@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> Hypothesis Calculation </title>
+	<link rel="icon" type="image/x-icon" href="stat.png">
+	<style>
+        body {
+            font-family: Yatra one;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+			background-color: #D2E0FB;
+        }
+		.logo {
+			width: 60% auto;
+			height: 100px;
+			margin-left:30%;
+			margin-top: 20px;
+			border:;
+		}
+		
+		#IOP {
+			width:300px;
+			border:;
+			margin-top: -110px;
+			margin-left:65%;
+			height:100px;
+		}
+        .container {
+            background-color: #F5F0BB;
+            max-width: 400px;
+            margin-top: 1.5%;
+            margin-left: 15%;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 1);
+			border: #000000 solid 2px;
+			border-radius: 10px;
+        }
+		
+        h1 {
+            color: #333;
+            margin-left:16%;
+			margin-top: 2%;
+			text-shadow:0 2px #FF0000;;
+        }
+
+        p {
+            color: #555;
+        }
+	
+		.members {
+				width:35%;
+				height: 300px;
+				border:2px solid black;
+				margin-left: 60%;
+				margin-top: -400px;
+				border-radius:5px 5px;
+				background-color: #F8FDCF;
+				box-shadow: 5px 5px rgba(0, 0, 0, 1);
+		
+		}
+		.miss {
+				width: 80%;
+				height: 33px;
+				border-radius:2px 5px;
+				margin-top: 8px;
+				background-color:red;
+				margin-left: 12px;
+				
+		}
+		h3 {
+				text-align: center;
+				font-size: 25px;
+				color: White;
+				margin-top: 0px;
+				text-shadow: 2px 2px black;
+		
+		}
+		
+		#flip {
+		  height:40px;
+		  overflow:hidden;
+		  margin-left: 20%;
+		  margin-top: -25px;
+		  font-size: 25px;
+		}
+
+		#flip > div > div {
+		  color:#fff;
+		  padding:4px 12px;
+		  height:45px;
+		  margin-bottom:45px;
+		  display:inline-block;
+		}
+
+		#flip div:first-child {
+		  animation: show 5s linear infinite;
+		}
+
+		#flip div div {
+		  background:#42c58a;
+		}
+		#flip div:first-child div {
+		  background:#4ec7f3;
+		}
+		#flip div:last-child div {
+		  background:#DC143C;
+		}
+
+		@keyframes show {
+		  0% {margin-top:-270px;}
+		  5% {margin-top:-180px;}
+		  33% {margin-top:-180px;}
+		  38% {margin-top:-90px;}
+		  66% {margin-top:-90px;}
+		  71% {margin-top:0px;}
+		  99.99% {margin-top:0px;}
+		  100% {margin-top:-270px;}
+		}
+		#detail {
+			margin-left: 10px;
+			font-size: 30px;
+			text-shadow : 2px 2px white;
+		}
+		.np {
+			width:230px;
+			margin-left:68%;
+			margin-top:30px;
+			height:40px;
+			padding-left:8px;
+			font-size:25px;
+			background-color: #29ADB2;
+			box-shadow: 3px 3px rgba(0, 0, 0, 1);
+			border-radius: 5px;
+		}
+        .result {
+            font-weight: bold;
+            color: green;
+        }
+
+        .error {
+            font-weight: bold;
+            color: #ff0000;
+        }
+
+        input[type="number"] {
+            width: 65%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: #0073e6;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+			border-radius: 5px;
+			box-shadow: 0 0 8px rgba(0, 0, 0, 1);
+        }
+
+        button:hover {
+            background-color: #9BE8D8;
+			color: #000000;
+			font-weight: bold;
+			transition: 0.3s;
+			border: 1px solid black;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 60px;
+			
+        }
+
+        .modal-content {
+            background-color: #F8FDCF;
+            margin: 20% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 60%;
+			text-align: center;
+			color:green;
+			font-weight:bold;
+			border: 1px solid black;
+			border-radius: 10px 30px;
+			text-shadow: ;
+			font-size: 20px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;	
+			margin-top: 2%;
+			margin-left: 3%;
+            font-size:  25px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            text-decoration: none;
+            cursor: pointer;
+			color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+			<div class="logo"> 
+				<img src="uni.png">
+				<div Id="IOP">
+					<img src="IOP.png" style="width:280px;">
+				</div>
+			</div>
+            <h1> Hypothesis Testing Calculator </h1>
+		 <div class="container">				
+            <form>
+                <p> Enter the Sample Mean </p>
+                <input type="number" placeholder="Sample Mean" id="sample_mean">
+                <p> Enter the Population Mean </p>
+                <input type="number" placeholder="Population Mean" id="population_mean">
+                <p> Enter the Population Standard Deviation </p>
+                <input type="number" placeholder="Population Std Dev" id="population_std_dev">
+                <p> Enter the Sample Size </p>
+                <input type="number" placeholder="Sample Size" id="sample_size">
+                <p> Enter the Significance level/ alpha value  </p>
+                <input type="number" placeholder="Significance Level" id="alpha" min="0" max="5">
+                <br>
+                <br>
+                <button type="button" onclick="performHypothesisTest()">Calculate</button>
+            </form>
+            <p class="result" id="output"></p>
+        </div>
+		<div class="members"> 
+			<div class="miss"> 	<h3> Instructor: Miss Javeria Taleem</h3></div>
+			<div Id="detail"> <p style="color:black;"> Group Members: </p>  </div>
+			<div Id="flip">
+				<div><div>Shahzad (Phys221101016)</div></div>
+				<div><div>M. Ishaq (Phys221101002)</div></div>
+				<div><div>M.Bilal (Phys221101027)</div></div>
+			</div>
+			<div style="width:73%; border-radius:5px;  font-size:20px; margin-left:20px; margin-top:50px; height:38px; "> <p style="color:white; text-shadow:2px 2px black; text-align:center; margin-top: 3px; font-size:30px; background-color:red;"> Class: BS-PHYSICS 3rd </p></div>
+			<div style="width:73%; border: ; margin-left:20px; height:38px; margin-top:2px; background-color:red;"> <p style="font-size:25px; color:white; text-shadow:2px 2px black; text-align:center; margin-top:8px;"> Course: Probability & Statistics </p> </div>
+		</div>
+		<div class="np"> <p style="padding-top:5px; color:white; text-shadow:1px 1px #F05941; "> Real Life Application </p> <a href="detail.html" target=”_blank”> <img src="next-button.png"  style="; height:50px; margin-top:-10px; margin-left:80px;"> </a>
+		</div>
+        <!-- Modal -->
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <p id="modalResult"></p>
+            </div>
+        </div>
+
+      <script>
+		function performHypothesisTest() {
+			const sample_mean = parseFloat(document.getElementById("sample_mean").value);
+			const population_mean = parseFloat(document.getElementById("population_mean").value);
+			const population_std_dev = parseFloat(document.getElementById("population_std_dev").value);
+			const sample_size = parseFloat(document.getElementById("sample_size").value);
+			const alpha = parseFloat(document.getElementById("alpha").value);
+
+			if (isNaN(sample_mean) || isNaN(population_mean) || isNaN(population_std_dev) || isNaN(sample_size) || isNaN(alpha)) {
+				document.getElementById("output").className = "error";
+				document.getElementById("output").textContent = "Please enter valid numeric values.";
+				return;
+			}
+
+			let testResult = "";
+			let testName = "";
+
+			if (sample_size > 30) {
+				// Perform Z-test
+				const z_score = (sample_mean - population_mean) / (population_std_dev / Math.sqrt(sample_size));
+
+				testName = "Z-test";
+				testResult = z_score.toFixed(4);
+			} else {
+				// Perform T-test for sample size <= 30
+				const t_score = (sample_mean - population_mean) / (population_std_dev / Math.sqrt(sample_size));
+
+				testName = "T-test";
+				testResult = t_score.toFixed(4);
+			}
+
+			const criticalValue = 1.96; // This is an example critical value for a 5% significance level (you can adjust it)
+
+			if (Math.abs(testResult) > criticalValue) {
+				document.getElementById("modalResult").className = "result";
+				document.getElementById("modalResult").textContent = `${testName} Result: ${testResult} | Reject the null hypothesis. The hypothesis is wrong.`;
+			} else {
+				document.getElementById("modalResult").className = "result";
+				document.getElementById("modalResult").textContent = `${testName} Result: ${testResult} | Fail to reject the null hypothesis. The hypothesis is correct.`;
+			}
+
+			// Show the modal
+			const modal = document.getElementById("myModal");
+			modal.style.display = "block";
+		}
+
+		// Function to close the modal
+		function closeModal() {
+			const modal = document.getElementById("myModal");
+			modal.style.display = "none";
+		}
+		</script>
+
+    </div>
+</body>
+
+</html>
